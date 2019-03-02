@@ -1,0 +1,10 @@
+{
+  "presets": [
+    [
+      "babel-preset-es2015"
+    ]
+  ],
+  "plugins": [
+    "transform-html-import-require-to-string"
+  ]
+}

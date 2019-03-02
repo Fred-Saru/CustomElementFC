@@ -1,0 +1,70 @@
+<style>
+  .app-header {
+    flex-grow: 1;
+  }
+
+  .header-zone {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    background-color: #3b263f;
+  }
+
+  .empty-zone {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .action-zone,
+  .menu-zone,
+  .search-zone {
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-zone {
+    margin-right: 35px;
+  }
+
+  .header-collapse {
+    position: absolute;
+    background-color: #a0a0a0;
+    width: 36px;
+    height: 18px;
+    border-radius: 0 0 18px 18px;
+    border: none;
+    top: 60px;
+    left: calc(50% - (18px / 2));
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .header-collapse:focus {
+    outline: none;
+  }
+
+  .header-collapse:hover {
+    background-color: #bababa;
+  }
+
+  .header-collapse.is-collapsed {
+    top: 0;
+  }
+</style>
+<div class="app-header">
+  <div class="header-zone">
+    <div class="empty-zone">
+    </div>
+    <div class="search-zone">
+
+    </div>
+    <div class="action-zone">
+
+    </div>
+  </div>
+  <button class="header-collapse is-collapsed" type="button">
+  </button>
+</div>
