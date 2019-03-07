@@ -1,16 +1,24 @@
 import html from './Menu.html';
+import CustomElement from '../../utils/custom-element';
 
-export default class Menu extends HTMLElement {
+export default class Menu extends CustomElement {
 
   constructor() {
     super();
 
-    const template = document.createElement('template');
-    template.innerHTML = html;
+    this.template = document.createElement('template');
+    this.template.innerHTML = this._translate(html);
+    this._prepareTemplate(this.template, 'fc-menu');
+  }
 
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this.shadowRoot.querySelector('#menuCollapseBtn').addEventListener('click', () => this.collapsed = !this.collapsed);
+  connectedCallback() {
+    this._styleElement();
+
+    if (!this.shadowRoot) {
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.appendChild(this.template.content.cloneNode(true));
+      this.shadowRoot.querySelector('#menuCollapseBtn').addEventListener('click', () => this.collapsed = !this.collapsed);
+    }
   }
 
   collapse(shouldCollape: boolean) {

@@ -1,0 +1,61 @@
+<style>
+  :host {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  :host([hidden]) {
+    display: none;
+  }
+
+  :host-context(.pit) .shutter-header {
+    background-color: #263c61;
+  }
+
+  .shutter-container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .shutter-overlay {
+    cursor: pointer;
+    background-color: rgba(68, 68, 68, 0.5);
+    flex-grow: 1;
+  }
+
+  .shutter-header {
+    height: 60px;
+    width: 33vw;
+    padding: 0 15px;
+    background-color: #3b263f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .shutter-title {
+    color: white;
+    margin: 0;
+    font-weight: 500;
+    font-size: 2rem;
+  }
+
+  .shutter-title::first-letter {
+    text-transform: uppercase;
+  }
+</style>
+<div class="shutter-container">
+  <div class="shutter-overlay" id="shutter-overlay"></div>
+  <div class="shutter-header">
+    <h1 class="shutter-title" id="shutter-title">[[default-title-label]]</h1>
+    <button type="button" id="shutter-close">close</button>
+  </div>
+  <div id="shutter-content ">
+
+  </div>
+</div>

@@ -35,3 +35,8 @@ export interface IDisposableService {
 export interface IRegistrationAwareService {
   onServiceRegistered(serviceProvider: ServiceProvider): void;
 }
+
+export class CommonService {
+  static TranslationService: string = "translation-service";
+  static ShutterService: string = "shutter-service";
+}

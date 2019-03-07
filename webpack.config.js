@@ -14,6 +14,11 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        use: ['html-loader?exportAsEs6Default']
+      },
+      {
         test: /\.tsx?$/,
         loader: "babel-loader?presets[]=es2015!ts-loader"
       },
@@ -21,11 +26,6 @@ const config = {
         test: /\.jsx?$/,
         exclude: /[node_modules|loaders]/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.html$/,
-        exclude: /node_modules/,
-        use: ['html-loader?exportAsEs6Default', 'custom-element-loader']
       },
       {
         test: /\.css$/,
@@ -36,13 +36,11 @@ const config = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".html"]
   },
-  resolveLoader: {
-    alias: {
-      'custom-element-loader': path.join(__dirname, './loaders/custom-element-loader.js')
-    }
-  },
   devServer: {
-    contentBase: './dist/',
+    contentBase: [
+      path.resolve(__dirname, "dist"),
+      path.resolve(__dirname, "node_modules")
+    ],
     hot: true,
     historyApiFallback: true
   },

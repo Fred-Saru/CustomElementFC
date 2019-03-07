@@ -1,5 +1,5 @@
 import { IMap } from "./collections";
-import { ServiceProvider } from "./service-provider";
+import { ServiceProvider, CommonService } from "./service-provider";
 
 export declare type ShutterSize = 'large' | 'small';
 
@@ -184,4 +184,4 @@ export function overrideShutterContent(content: HTMLElement) {
 
 let service = new ShutterService();
 service.initialize('shutter', 'shutter-content');
-ServiceProvider.Instance.registerService('shutterservice', service);
+ServiceProvider.Instance.registerService(CommonService.ShutterService, service);
