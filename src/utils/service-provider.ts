@@ -36,7 +36,8 @@ export interface IRegistrationAwareService {
   onServiceRegistered(serviceProvider: ServiceProvider): void;
 }
 
-export class CommonService {
+export class CommonServices {
   static TranslationService: string = "translation-service";
   static ShutterService: string = "shutter-service";
+  static PreferenceShutterService: string = "preference-shutter-service";
 }

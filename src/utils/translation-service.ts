@@ -1,4 +1,4 @@
-import { ServiceProvider, CommonService } from './service-provider';
+import { ServiceProvider, CommonServices } from './service-provider';
 import * as i18next from 'i18next';
 import InternationalHelper from './intl-helper';
 import { i18n } from 'i18next';
@@ -103,14 +103,14 @@ class TranslationService implements ITranslationService {
 }
 
 export function i18n_init(resources: i18next.Resource) {
-  ServiceProvider.Instance.getService<ITranslationService>(CommonService.TranslationService).mergeResources(resources);
+  ServiceProvider.Instance.getService<ITranslationService>(CommonServices.TranslationService).mergeResources(resources);
 }
 
 export function i18n(key: string, options?: i18next.TranslationOptions): string {
-  return ServiceProvider.Instance.getService<ITranslationService>(CommonService.TranslationService).translate(key, options);
+  return ServiceProvider.Instance.getService<ITranslationService>(CommonServices.TranslationService).translate(key, options);
 }
 
 ServiceProvider.Instance.registerService(
-  CommonService.TranslationService,
+  CommonServices.TranslationService,
   new TranslationService()
 );

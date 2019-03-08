@@ -6,6 +6,8 @@
   ul {
     padding: 0;
     margin: 0;
+    height: 100px;
+    background-color: lightsalmon;
   }
 
   .menu-container {
@@ -15,7 +17,7 @@
   }
 
   .menu-zone {
-    width: 245px;
+    width: 240px;
     height: calc(100vh - 60px);
     background-color: #3b263f;
     position: relative;
@@ -59,11 +61,16 @@
     outline: none;
   }
 
+  .menu-hub>.category-title {
+    background-color: #3b263f;
+  }
+
   .menu-hub>.category-title:hover {
     background-color: #523558;
   }
 
-  .application-hub {
+  .application-hub,
+  .application-hub>.category-title {
     background-color: #5e3448;
   }
 
@@ -105,7 +112,8 @@
     height: calc(100vh - 60px);
     color: #fff;
     border: none;
-    width: 5px;
+    width: 10px;
+    padding: 0;
   }
 
   .collapse-zone:focus {
@@ -119,23 +127,27 @@
   .collapse-zone:hover {
     background-color: #523558;
   }
+
+  .hidden {
+    display: none;
+  }
 </style>
 <div class="menu-container">
   <div class="menu-zone">
     <ul role="menubar">
       <li class="application-hub">
-        <button type="button" class="category-title">
+        <button type="button" class="category-title" id="hubBtn">
           <span class="menu-category-name">[[application-label]]</span>
         </button>
-        <ul class=" tile-list">
+        <ul class="tile-list hub hidden">
 
         </ul>
       </li>
       <li class="menu-hub">
-        <button type="button" class="category-title">
-          <span class="menu-category-name">[[menu-label]]</span>
+        <button type="button" class="category-title" id="menuBtn">
+          <span class=" menu-category-name">[[menu-label]]</span>
         </button>
-        <ul>
+        <ul class="menu-list hub">
 
         </ul>
       </li>

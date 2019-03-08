@@ -12,6 +12,9 @@ import { i18n_init } from './translation-service';
       },
       "fc-shutter": {
         "default-title-label": "mes paramètres"
+      },
+      "fc-quicksearch": {
+        "search-label": "Rechercher"
       }
     },
     "en": {
@@ -24,6 +27,9 @@ import { i18n_init } from './translation-service';
       },
       "fc-shutter": {
         "default-title-label": "my parameters"
+      },
+      "fc-quicksearch": {
+        "search-label": "Search"
       }
     }
   });

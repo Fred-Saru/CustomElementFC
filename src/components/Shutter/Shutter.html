@@ -17,10 +17,6 @@
     flex-direction: row-reverse;
   }
 
-  :host-context(.pit) .shutter-header {
-    background-color: #263c61;
-  }
-
   .shutter {
     display: flex;
     height: 100vh;
@@ -42,6 +38,16 @@
 
   .shutter-container.full {
     width: 100vw;
+  }
+
+  @media (max-width: 1200px) {
+    .shutter-container {
+      width: 50vw;
+    }
+
+    .shutter-container.wide {
+      width: 100vw;
+    }
   }
 
   .shutter-header {
@@ -94,6 +100,6 @@
         X
       </button>
     </div>
-    <div class="shutter-content" id="shutter-content "></div>
+    <div class="shutter-content" id="shutter-content"></div>
   </div>
 </div>

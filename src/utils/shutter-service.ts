@@ -1,7 +1,8 @@
 import { IMap } from "./collections";
-import { ServiceProvider, CommonService } from "./service-provider";
+import { ServiceProvider, CommonServices } from "./service-provider";
 
-export declare type ShutterSize = 'large' | 'small';
+export declare type ShutterSize = 'full' | 'wide' | 'small';
+export declare type ShutterSide = 'left' | 'right';
 
 export interface IShutterService {
   register(key: string, viewName: string, options?: IShutterViewOption): void;
@@ -10,6 +11,7 @@ export interface IShutterService {
 
 export interface IShutterViewOption {
   shutterSize?: ShutterSize;
+  shutterSide?: ShutterSide;
 }
 
 export interface IShutterViewRegistration {
@@ -24,21 +26,13 @@ export interface IShutterWrapper {
 
 class ShutterWrapper implements IShutterWrapper {
   private _shutter: IShutterComponent;
-  private _shutterId: string;
-  private _shutterContentId: string;
-  private _shutterContent: HTMLElement;
-
-  constructor(shutterId: string, shutterContentId: string) {
-    this._shutterId = shutterId;
-    this._shutterContentId = shutterContentId;
-  }
 
   get title(): string {
-    return this.shutter.titleBar;
+    return this.shutter.header;
   }
 
   set title(value: string) {
-    this.shutter.titleBar = value;
+    this.shutter.header = value;
   }
 
   get shutter(): IShutterComponent {
@@ -47,24 +41,15 @@ class ShutterWrapper implements IShutterWrapper {
   }
 
   get shutterContent(): HTMLElement {
-    this.ensureShutterContent();
-    return this._shutterContent;
+    this.ensureShutter();
+    return this._shutter.content;
   }
 
   private ensureShutter(): void {
     if (!this._shutter) {
-      this._shutter = <IShutterComponent><any>document.getElementById(this._shutterId);
+      this._shutter = <IShutterComponent><any>document.querySelector('fc-shutter');
       if (!this._shutter) {
-        throw new Error(`shutter with id ${this._shutterId} not found`);
-      }
-    }
-  }
-
-  private ensureShutterContent(): void {
-    if (!this._shutterContent) {
-      this._shutterContent = <IShutterComponent><any>document.getElementById(this._shutterContentId);
-      if (!this._shutter) {
-        throw new Error(`shutter content with id ${this._shutterContentId} not found`);
+        throw new Error(`No shutter where found in the page.`);
       }
     }
   }
@@ -77,9 +62,11 @@ class ShutterWrapper implements IShutterWrapper {
 }
 
 interface IShutterComponent extends HTMLElement {
-  isOpened: boolean;
+  isOpen: boolean;
   size: string;
-  titleBar: string;
+  side: string;
+  content: HTMLElement;
+  header: string;
   open(): void;
   close(): void;
 }
@@ -95,13 +82,14 @@ export class ShutterService implements IShutterService {
   private _registrations: IMap<IShutterViewRegistration> = {};
   private _host: ShutterWrapper;
 
-  public initialize(shutterId: string, shutterContentId: string): void {
-    this._host = new ShutterWrapper(shutterId, shutterContentId);
+  public constructor() {
+    this._host = new ShutterWrapper();
   }
 
   public register(key: string, viewName: string, options?: IShutterViewOption): void {
     options = options || {};
-    options.shutterSize = options.shutterSize || 'small';
+    options.shutterSize = options.shutterSize;
+    options.shutterSide = options.shutterSide;
 
     this._registrations[key] = {
       viewName: viewName,
@@ -138,12 +126,11 @@ export class ShutterService implements IShutterService {
         reject(new Error(`Invalid view implementation (component name: ${registration.viewName}`));
       }
 
-      const shutterContent = this._host.shutterContent;
       const shutter = this._host.shutter;
-      shutter.titleBar = '';
+      shutter.header = '';
       shutter.size = registration.options.shutterSize;
 
-      if (shutter.isOpened) {
+      if (shutter.isOpen) {
         shutter.close();
       }
 
@@ -156,7 +143,7 @@ export class ShutterService implements IShutterService {
       const closeCallback = () => {
         if (view) {
           view.dispose();
-          shutterContent.removeChild(view);
+          shutter.content = null;
           view = null;
           shutter.removeEventListener('closed', closeCallback);
           if (!isResolved) {
@@ -167,21 +154,12 @@ export class ShutterService implements IShutterService {
       };
 
       shutter.addEventListener('closed', closeCallback);
-      shutterContent.appendChild(view);
+      shutter.content = view;
       view.activate(args, this._host, resolveCallback);
       shutter.open();
     });
   }
 }
 
-export function loadShutterContent(content: HTMLElement) {
-  document.getElementById('shutter-content').appendChild(content);
-}
-
-export function overrideShutterContent(content: HTMLElement) {
-  document.getElementById('shutter-content').innerHTML = <any>content;
-}
-
 let service = new ShutterService();
-service.initialize('shutter', 'shutter-content');
-ServiceProvider.Instance.registerService(CommonService.ShutterService, service);
+ServiceProvider.Instance.registerService(CommonServices.ShutterService, service);

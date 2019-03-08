@@ -13,8 +13,6 @@ class Shutter extends CustomElement {
     this.template.innerHTML = this._translate(html);
     this._prepareTemplate(this.template, 'fc-shutter');
 
-    // TEST
-
     this._styleElement();
 
     if (!this.shadowRoot) {
@@ -40,7 +38,7 @@ class Shutter extends CustomElement {
   }
 
   static get observedAttributes() {
-    return ['size', 'side'];
+    return ['size', 'side', 'header'];
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {
@@ -50,6 +48,9 @@ class Shutter extends CustomElement {
         break;
       case 'side':
         this.changeSideValue(oldValue, newValue);
+        break;
+      case 'header':
+        this.changeHeaderValue(oldValue, newValue);
         break;
       default:
         throw new Error(`Attribute ${name} is not supported.`);
@@ -70,8 +71,17 @@ class Shutter extends CustomElement {
     return this.classList.contains('show');
   }
 
-  set title(newTitle: string) {
-    this.shadowRoot.querySelector('shutter-title').textContent = newTitle;
+  get content() {
+    return <HTMLElement>this.shadowRoot.querySelector('#shutter-content').firstElementChild;
+  }
+
+  set content(newValue: HTMLElement | null) {
+    const content = this.shadowRoot.querySelector('#shutter-content');
+    content.innerHTML = "";
+
+    if (newValue) {
+      content.appendChild(newValue);
+    }
   }
 
   get size() {
@@ -92,6 +102,18 @@ class Shutter extends CustomElement {
     if (this.checkSideValue(newSide)) {
       this.setAttribute('side', newSide);
     }
+  }
+
+  get header() {
+    return this.getAttribute('header');
+  }
+
+  set header(newTitle: string) {
+    this.setAttribute('header', newTitle);
+  }
+
+  changeHeaderValue(oldValue: string, newValue: string) {
+    this.shadowRoot.querySelector('#shutter-title').textContent = newValue;
   }
 
   changeSizeValue(oldValue: string, newValue: string) {
