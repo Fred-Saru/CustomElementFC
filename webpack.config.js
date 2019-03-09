@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 const config = {
@@ -20,7 +20,7 @@ const config = {
       },
       {
         test: /\.tsx?$/,
-        loader: "babel-loader?presets[]=es2015!ts-loader"
+        loader: 'babel-loader?presets[]=es2015!ts-loader'
       },
       {
         test: /\.jsx?$/,
@@ -34,7 +34,7 @@ const config = {
       {
         test: /\.svg$/,
         use: [
-          { loader: 'file-loader' },
+          { loader: 'raw-loader' },
           {
             loader: 'svgo-loader',
             options: {
@@ -50,12 +50,12 @@ const config = {
     ]
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".html"]
+    extensions: ['.ts', '.tsx', '.js', '.html']
   },
   devServer: {
     contentBase: [
-      path.resolve(__dirname, "dist"),
-      path.resolve(__dirname, "node_modules")
+      path.resolve(__dirname, 'dist'),
+      path.resolve(__dirname, 'node_modules')
     ],
     hot: true,
     historyApiFallback: true

@@ -9,15 +9,15 @@ class Shutter extends CustomElement {
   constructor() {
     super();
 
-    this.template = document.createElement('template');
-    this.template.innerHTML = this._translate(html);
-    this._prepareTemplate(this.template, 'fc-shutter');
+    this._template = document.createElement('template');
+    this._template.innerHTML = this._translate(html);
+    this._prepareTemplate(this._template, 'fc-shutter');
 
     this._styleElement();
 
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
-      this.shadowRoot.appendChild(this.template.content.cloneNode(true));
+      this.shadowRoot.appendChild(this._template.content.cloneNode(true));
       this.shadowRoot
         .querySelector('#shutter-close')
         .addEventListener('click', () => this.close());
@@ -72,12 +72,14 @@ class Shutter extends CustomElement {
   }
 
   get content() {
-    return <HTMLElement>this.shadowRoot.querySelector('#shutter-content').firstElementChild;
+    return <HTMLElement>(
+      this.shadowRoot.querySelector('#shutter-content').firstElementChild
+    );
   }
 
   set content(newValue: HTMLElement | null) {
     const content = this.shadowRoot.querySelector('#shutter-content');
-    content.innerHTML = "";
+    content.innerHTML = '';
 
     if (newValue) {
       content.appendChild(newValue);

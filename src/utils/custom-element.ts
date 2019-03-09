@@ -4,7 +4,7 @@ import './translation-service';
 import { i18n as ___i18n } from './translation-service';
 
 export default class CustomElement extends HTMLElement {
-  template: HTMLTemplateElement;
+  _template: HTMLTemplateElement;
 
   public _i18n(key: string, options?: i18next.TranslationOptions): string {
     if (!key) {
@@ -19,9 +19,12 @@ export default class CustomElement extends HTMLElement {
 
   templateVar = /\[\[(.+)\]\]/g;
   public _translate(template: string): string {
-    return template.replace(this.templateVar, (substring: string, ...args: any[]) => {
-      return this._i18n(args[0]);
-    });
+    return template.replace(
+      this.templateVar,
+      (substring: string, ...args: any[]) => {
+        return this._i18n(args[0]);
+      }
+    );
   }
 
   public _prepareTemplate(template: HTMLTemplateElement, key: string): void {

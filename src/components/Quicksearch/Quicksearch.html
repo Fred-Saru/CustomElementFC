@@ -19,6 +19,7 @@
     text-align: center;
     font-size: 1.3rem;
     width: 240px;
+    margin-left: 1px;
   }
 
   input:focus {
@@ -42,14 +43,22 @@
   button:focus {
     outline: none;
   }
+
+  .quicksearch-container {
+    display: flex;
+  }
 </style>
-<div>
+<div class="quicksearch-container">
   <select>
     <option>Formula</option>
     <option>RM</option>
     <option>Socle</option>
   </select>
   <input type="text" placeholder="[[search-label]]" />
-  <button type="button">Q</button>
-  <button type="button">O</button>
+  <button type="button">
+    <fc-icon name="search" size="18"></fc-icon>
+  </button>
+  <button type="button">
+    <fc-icon name="free-search" size="18"></fc-icon>
+  </button>
 </div>

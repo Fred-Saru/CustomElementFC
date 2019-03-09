@@ -29,31 +29,31 @@
     margin-right: 30px;
   }
 
-  .action-zone>button {
+  .action-zone > button {
     width: 60px;
     height: 60px;
     border: 0;
     background-color: transparent;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .action-zone>button>span {
+  .action-zone > button > span {
     background-color: white;
     width: 30px;
     height: 30px;
-    line-height: 30px;
     border-radius: 50%;
     color: #3b263f;
-    display: inline-block;
-    text-align: center;
   }
 
-  .action-zone>button:hover {
+  .action-zone > button:hover {
     background-color: #4a304f;
   }
 
-  .action-zone>button:active,
-  .action-zone>button:focus {
+  .action-zone > button:active,
+  .action-zone > button:focus {
     outline: none;
   }
 
@@ -67,11 +67,21 @@
     color: white;
     font-size: 20px;
     font-weight: 500;
-    vertical-align: middle;
     text-decoration: none;
-    line-height: 60px;
     padding-left: 15px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .app-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
+
+  .app-name {
+    flex-grow: 1;
   }
 
   .hidden {
@@ -81,7 +91,12 @@
 <div class="app-header">
   <div class="header-zone">
     <div class="application-zone">
-      <a class="application-home" href="#">FORMULA</a>
+      <a class="application-home" href="#">
+        <span class="app-icon">
+          <fc-icon name="fla" size="30" color="pink"></fc-icon>
+        </span>
+        <span class="app-name">FORMULA</span>
+      </a>
     </div>
     <div class="empty-zone"></div>
     <div class="search-zone">
@@ -90,17 +105,17 @@
     <div class="action-zone">
       <button type="button">
         <span>
-          <fc-icon name="help"></fc-icon>
+          <fc-icon name="help" size="25"></fc-icon>
         </span>
       </button>
       <button type="button">
         <span>
-          <fc-icon name="email"></fc-icon>
+          <fc-icon name="email" size="20"></fc-icon>
         </span>
       </button>
       <button type="button" id="open-btn">
         <span>
-          <fc-icon name="settings"></fc-icon>
+          <fc-icon name="settings" size="25"></fc-icon>
         </span>
       </button>
     </div>
