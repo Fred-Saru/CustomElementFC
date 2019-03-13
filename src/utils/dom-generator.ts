@@ -1,9 +1,9 @@
-interface IDomOption {
+export interface IDomOption {
   classes: string[],
   attributes: any
 }
 
-class DomGenerator {
+export class DomGenerator {
   static generate(tag: string, options?: IDomOption): HTMLElement {
     const el = document.createElement(tag);
 
@@ -23,5 +23,3 @@ class DomGenerator {
     return el;
   }
 }
-
-export default DomGenerator;

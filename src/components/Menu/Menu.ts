@@ -1,5 +1,5 @@
 import html from './Menu.html';
-import CustomElement from '../../utils/custom-element';
+import CustomElement from '../../models/custom-element';
 import { Icon } from '../Icon/Icon';
 
 export default class Menu extends CustomElement {
@@ -8,7 +8,7 @@ export default class Menu extends CustomElement {
 
     this._template = document.createElement('template');
     this._template.innerHTML = this._translate(html);
-    this._prepareTemplate(this._template, 'fc-menu');
+    this._prepareTemplate('fc-menu');
     this._styleElement();
 
     if (!this.shadowRoot) {
@@ -38,14 +38,16 @@ export default class Menu extends CustomElement {
   };
 
   toggleMenu = (e: MouseEvent) => {
-    const menus = <HTMLElement[]>(
+    const menus = <HTMLElement[]>Array.from(
       (<any>this.shadowRoot.querySelectorAll('.hub'))
     );
     for (let i in menus) {
       if (menus[i].classList.contains('hidden')) {
         menus[i].classList.remove('hidden');
+        menus[i].parentElement.querySelector('fc-icon').setAttribute('name', 'arrow-up');
       } else {
         menus[i].classList.add('hidden');
+        menus[i].parentElement.querySelector('fc-icon').setAttribute('name', 'arrow-down');
       }
     }
   };

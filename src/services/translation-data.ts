@@ -7,8 +7,8 @@ import { i18n_init } from './translation-service';
 
       },
       "fc-menu": {
-        "menu-label": "MENU_FR",
-        "application-label": "APPLICATION_FR"
+        "menu-label": "Menu",
+        "application-label": "Applications"
       },
       "fc-shutter": {
         "default-title-label": "mes paramètres"
@@ -22,8 +22,8 @@ import { i18n_init } from './translation-service';
 
       },
       "fc-menu": {
-        "menu-label": "MENU_EN",
-        "application-label": "APPLICATION_EN"
+        "menu-label": "Menu",
+        "application-label": "Applications"
       },
       "fc-shutter": {
         "default-title-label": "my parameters"

@@ -34,6 +34,81 @@
   <fc-shutter></fc-shutter>
 
   <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+  <script>
+    var fcSettings = {
+      appKey: "formula",
+      user: {
+        roles: ["CFL_USER"]
+      }
+    }
+
+    var currentContext = [
+      {
+        key: "formula",
+        menu: {
+          label: {
+            def: "Formula"
+          },
+          icon: "fla",
+          url: "http://localhost:8081/#formula",
+          order: 1
+        },
+        title: {
+          label: {
+            def: "Formula"
+          },
+          icon: "fla",
+          url: "http://localhost:8081/#formula"
+        },
+        quicksearch: {
+          label: {
+            def: "Formula"
+          },
+          exactSearch: {
+            url: "http://localhost:8081/{term}#exactSearchFormula",
+            formattingOptions: {
+              trim: true,
+              characterCasing: "upper"
+            },
+            placeholder: {
+              en: 'Exact formula code',
+              fr: 'Code formule exact'
+            }
+          },
+          freeSearch: {
+            url: "http://localhost:8081/{term}#freeSearchFormula",
+            placeholder: {
+              en: 'Partial formula code',
+              fr: 'Code formule partiel'
+            }
+          }
+        }
+      },
+      {
+        key: "rm",
+        search: {
+          label: {
+            en: "RM",
+            fr: "FR"
+          },
+          exactSearch: {
+            url: "http://localhost:8081/{term}#exactSearchRM",
+            placeholder: {
+              en: 'Exact rm code',
+              fr: 'Code mp exact'
+            }
+          },
+          freeSearch: {
+            url: "http://localhost:8081/{term}#freeSearchRM",
+            placeholder: {
+              en: 'Partial rm code',
+              fr: 'Code mp partiel'
+            }
+          }
+        }
+      }
+    ]
+  </script>
 </body>
 
 </html>

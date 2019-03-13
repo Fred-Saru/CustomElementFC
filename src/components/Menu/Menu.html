@@ -56,30 +56,37 @@
     width: 100%;
   }
 
+  .category-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .category-title:focus,
   .application-title:focus {
     outline: none;
   }
 
-  .menu-hub > .category-title {
+  .menu-hub>.category-title {
     background-color: #3b263f;
   }
 
-  .menu-hub > .category-title:hover {
+  .menu-hub>.category-title:hover {
     background-color: #523558;
   }
 
   .application-hub,
-  .application-hub > .category-title {
+  .application-hub>.category-title {
     background-color: #5e3448;
   }
 
-  .application-hub > .category-title:hover {
+  .application-hub>.category-title:hover {
     background-color: #754059;
   }
 
   .menu-category-name {
     line-height: 60px;
+    text-transform: uppercase;
   }
 
   .menu-collapse {
@@ -138,12 +145,18 @@
       <li class="application-hub">
         <button type="button" class="category-title" id="hubBtn">
           <span class="menu-category-name">[[application-label]]</span>
+          <span>
+            <fc-icon name="arrow-down" size="15" color="white"></fc-icon>
+          </span>
         </button>
         <ul class="tile-list hub hidden"></ul>
       </li>
       <li class="menu-hub">
         <button type="button" class="category-title" id="menuBtn">
-          <span class=" menu-category-name">[[menu-label]]</span>
+          <span class="menu-category-name">[[menu-label]]</span>
+          <span>
+            <fc-icon name="arrow-up" size="15" color="white"></fc-icon>
+          </span>
         </button>
         <ul class="menu-list hub"></ul>
       </li>

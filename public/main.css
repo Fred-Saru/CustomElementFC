@@ -155,7 +155,3 @@
           padding: 15px;
           overflow: auto;
       }
-
-      svg:not(:root) {
-          display: none;
-      }

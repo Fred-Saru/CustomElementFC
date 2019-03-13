@@ -49,16 +49,12 @@
   }
 </style>
 <div class="quicksearch-container">
-  <select>
-    <option>Formula</option>
-    <option>RM</option>
-    <option>Socle</option>
-  </select>
-  <input type="text" placeholder="[[search-label]]" />
-  <button type="button">
+  <fc-dropdown id="searchDropdown"></fc-dropdown>
+  <input type="text" placeholder="[[search-label]]" id="searchInput" />
+  <button type="button" id="searchBtn">
     <fc-icon name="search" size="18"></fc-icon>
   </button>
-  <button type="button">
-    <fc-icon name="free-search" size="18"></fc-icon>
+  <button type="button" id="searchType" isExact="true">
+    <fc-icon name="exact-search" size="18"></fc-icon>
   </button>
 </div>

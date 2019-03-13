@@ -1,15 +1,15 @@
-import '../../../utils/shutter-service';
+import '../../../services/shutter-service';
 import {
   IShutterView,
   IShutterWrapper,
   ResolveCallback,
   IShutterService
-} from '../../../utils/shutter-service';
-import CustomElement from '../../../utils/custom-element';
+} from '../../../services/shutter-service';
+import CustomElement from '../../../models/custom-element';
 import {
   ServiceProvider,
   CommonServices
-} from '../../../utils/service-provider';
+} from '../../../services/service-provider';
 import html from './Preference.html';
 
 export class PreferencesShutterComponent extends CustomElement
@@ -19,7 +19,7 @@ export class PreferencesShutterComponent extends CustomElement
 
     this._template = document.createElement('template');
     this._template.innerHTML = html;
-    this._prepareTemplate(this._template, 'fc-shutter-preference');
+    this._prepareTemplate('fc-shutter-preference');
     this._styleElement();
 
     if (!this.shadowRoot) {
@@ -36,7 +36,7 @@ export class PreferencesShutterComponent extends CustomElement
     shutter.title = "coucou c'est nous";
   }
 
-  dispose(): void {}
+  dispose(): void { }
 }
 
 window.customElements.define(

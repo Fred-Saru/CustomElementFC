@@ -1,0 +1,63 @@
+<style>
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-list {
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    margin: 0;
+    padding: 5px 0;
+    top: 110%;
+    width: 100%;
+  }
+
+  .dropdown-list li {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .dropdown-item {
+    padding: 3px 20px;
+    font-size: 1.5rem;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f5f5f5;
+  }
+
+  .dropdown-button {
+    height: 34px;
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px 20px;
+    font-size: 1.5rem;
+    min-width: 135px;
+    text-align: left;
+  }
+
+  .dropdown-button:active,
+  .dropdown-button:focus {
+    outline: none;
+  }
+
+  .button-icon {
+    float: right;
+  }
+
+  .hide {
+    display: none;
+  }
+</style>
+<div class="dropdown" id="dropdownContainer">
+  <button class="dropdown-button" id="dropdownBtn">
+    <div class="button-icon">
+      <fc-icon name="triangle-down" size="10"></fc-icon>
+    </div>
+    <div class="button-label" id="btnLabel">Text</div>
+  </button>
+  <ul class="dropdown-list hide" id="dropdownList">
+  </ul>
+</div>

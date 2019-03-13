@@ -1,5 +1,5 @@
-import { IMap } from "./collections";
 import { ServiceProvider, CommonServices } from "./service-provider";
+import { IMap } from "../utils/collections";
 
 export declare type ShutterSize = 'full' | 'wide' | 'small';
 export declare type ShutterSide = 'left' | 'right';

@@ -1,7 +1,7 @@
 import { ServiceProvider, CommonServices } from './service-provider';
 import * as i18next from 'i18next';
-import InternationalHelper from './intl-helper';
 import { i18n } from 'i18next';
+import InternationalHelper from '../utils/intl-helper';
 
 interface ITranslationService {
   setLanguage(language: string): void;

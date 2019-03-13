@@ -1,9 +1,10 @@
 import html from './Header.html';
-import CustomElement from '../../utils/custom-element';
-import { ServiceProvider, CommonServices } from '../../utils/service-provider';
+import CustomElement from '../../models/custom-element';
+import { ServiceProvider, CommonServices } from '../../services/service-provider';
 import '../Shutter/Preferences/Preferences';
 import { IPreferenceShutter } from '../Shutter/Preferences/Preferences';
 import '../Quicksearch/Quicksearch';
+import { CurrentContext } from '../../data/context-data';
 
 export default class Header extends CustomElement {
   constructor() {
@@ -11,12 +12,13 @@ export default class Header extends CustomElement {
 
     this._template = document.createElement('template');
     this._template.innerHTML = html;
-    this._prepareTemplate(this._template, 'fc-header');
+    this._prepareTemplate('fc-header');
     this._styleElement();
 
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.appendChild(this._template.content.cloneNode(true));
+      this.initHomeLink();
       this.shadowRoot
         .querySelector('#open-btn')
         .addEventListener('click', () => {
@@ -27,6 +29,16 @@ export default class Header extends CustomElement {
       window.addEventListener('resize', this.resizeHandler);
       this.resizeHandler();
     }
+  }
+
+  initHomeLink = () => {
+    const titleData = CurrentContext.getCurrentTitleData();
+    if (titleData) {
+      this.shadowRoot.querySelector('#home-icon').setAttribute('name', titleData.icon);
+      this.shadowRoot.querySelector('#home-label').textContent = CurrentContext.extractLabel(titleData.label);
+      this.shadowRoot.querySelector('#home-link').setAttribute('href', titleData.url);
+    }
+
   }
 
   resizeHandler = () => {

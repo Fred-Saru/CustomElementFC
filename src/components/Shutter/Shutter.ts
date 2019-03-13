@@ -1,5 +1,5 @@
 import html from './Shutter.html';
-import CustomElement from '../../utils/custom-element';
+import CustomElement from '../../models/custom-element';
 import { eventFire } from '../../utils/misc';
 
 class Shutter extends CustomElement {
@@ -11,7 +11,7 @@ class Shutter extends CustomElement {
 
     this._template = document.createElement('template');
     this._template.innerHTML = this._translate(html);
-    this._prepareTemplate(this._template, 'fc-shutter');
+    this._prepareTemplate('fc-shutter');
 
     this._styleElement();
 

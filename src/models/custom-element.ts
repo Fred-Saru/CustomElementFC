@@ -1,7 +1,7 @@
 import * as i18next from 'i18next';
-import './translation-data';
-import './translation-service';
-import { i18n as ___i18n } from './translation-service';
+import '../services/translation-data';
+import '../services/translation-service';
+import { i18n as ___i18n } from '../services/translation-service';
 
 export default class CustomElement extends HTMLElement {
   _template: HTMLTemplateElement;
@@ -27,9 +27,9 @@ export default class CustomElement extends HTMLElement {
     );
   }
 
-  public _prepareTemplate(template: HTMLTemplateElement, key: string): void {
+  public _prepareTemplate(key: string): void {
     const ieWindow = (<any>window).ShadyCSS;
-    ieWindow && ieWindow.prepareTemplate(template, key);
+    ieWindow && ieWindow.prepareTemplate(this._template, key);
   }
 
   public _styleElement() {

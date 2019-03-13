@@ -1,5 +1,5 @@
 import html from './Icon.html';
-import CustomElement from '../../utils/custom-element';
+import CustomElement from '../../models/custom-element';
 declare function require(path: string): any;
 
 const iconNames = [
@@ -7,6 +7,7 @@ const iconNames = [
   'arrow-left',
   'arrow-right',
   'arrow-up',
+  'close',
   'email',
   'exact-search',
   'fab',
@@ -24,7 +25,9 @@ const iconNames = [
   'socle',
   'substance',
   'supplier',
-  'techno'
+  'techno',
+  'triangle-down',
+  'triangle-up'
 ];
 
 let icons: any = {};
@@ -49,7 +52,7 @@ export class Icon extends CustomElement {
 
     this._template = document.createElement('template');
     this._template.innerHTML = html;
-    this._prepareTemplate(this._template, 'fc-icon');
+    this._prepareTemplate('fc-icon');
     this._styleElement();
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
