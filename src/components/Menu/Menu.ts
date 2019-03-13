@@ -1,6 +1,8 @@
 import html from './Menu.html';
 import CustomElement from '../../models/custom-element';
 import { Icon } from '../Icon/Icon';
+import { IMenu, CurrentContext } from '../../data/context-data';
+import '../Tile/Tile';
 
 export default class Menu extends CustomElement {
   constructor() {
@@ -26,6 +28,27 @@ export default class Menu extends CustomElement {
       window.addEventListener('resize', this.resizeHandler);
       this.resizeHandler();
     }
+  }
+
+  connectedCallback() {
+    this.initialize(CurrentContext.getAllMenuData());
+  }
+
+  initialize = (menuData: IMenu[]) => {
+    const hub = this.shadowRoot.querySelector('#tileHub');
+    const fragment = document.createDocumentFragment();
+    const selectedMenu = CurrentContext.getCurrentMenuData();
+    const menus = menuData.sort((a, b) => a.order > b.order ? 1 : -1);
+    menus.forEach((menu) => {
+      const tile = document.createElement('fc-tile');
+      tile.setAttribute('tile', JSON.stringify({ url: menu.url, label: CurrentContext.extractLabel(menu.label), icon: menu.icon }));
+      if (selectedMenu.order === menu.order) {
+        tile.setAttribute('selected', 'true');
+      }
+      fragment.appendChild(tile);
+    });
+
+    hub.appendChild(fragment);
   }
 
   resizeHandler = () => {

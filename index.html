@@ -86,7 +86,7 @@
       },
       {
         key: "rm",
-        search: {
+        quicksearch: {
           label: {
             en: "RM",
             fr: "FR"
@@ -105,7 +105,77 @@
               fr: 'Code mp partiel'
             }
           }
-        }
+        },
+        menu: {
+          label: {
+            en: "RM",
+            fr: "MP"
+          },
+          icon: "mp",
+          url: "http://localhost:8081/#mp",
+          order: 2
+        },
+      },
+      {
+        key: "socle",
+        quicksearch: {
+          label: {
+            def: "Socle"
+          },
+          exactSearch: {
+            url: "http://localhost:8081/{term}#exactSearchSocle",
+            placeholder: {
+              en: 'Exact socle code',
+              fr: 'Code socle exact'
+            }
+          },
+          freeSearch: {
+            url: "http://localhost:8081/{term}#freeSearchSocle",
+            placeholder: {
+              en: 'Partial socle code',
+              fr: 'Code socle partiel'
+            }
+          }
+        },
+        menu: {
+          label: {
+            def: "Socle"
+          },
+          icon: "socle",
+          url: "http://localhost:8081/#socle",
+          order: 3
+        },
+      },
+      ,
+      {
+        key: "techno",
+        quicksearch: {
+          label: {
+            def: "Techno"
+          },
+          exactSearch: {
+            url: "http://localhost:8081/{term}#exactSearchTechno",
+            placeholder: {
+              en: 'Exact techno code',
+              fr: 'Code techno exact'
+            }
+          },
+          freeSearch: {
+            url: "http://localhost:8081/{term}#freeSearchTechno",
+            placeholder: {
+              en: 'Partial techno code',
+              fr: 'Code techno partiel'
+            }
+          }
+        },
+        menu: {
+          label: {
+            def: "Techno"
+          },
+          icon: "techno",
+          url: "http://localhost:8081/#techno",
+          order: 4
+        },
       }
     ]
   </script>

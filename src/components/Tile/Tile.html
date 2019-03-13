@@ -1,0 +1,52 @@
+<style>
+  :host {
+    display: block;
+    margin: 7.5px 5px;
+  }
+
+  .tile-container {
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    background-color: #cd90ac;
+  }
+
+  .selected.tile-container,
+  .tile-container:hover {
+    background-color: #3b263f;
+  }
+
+  .tile-link {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .tile-icon {
+    fill: white;
+  }
+
+  .selected .tile-icon,
+  .tile-container:hover .tile-icon {
+    fill: #cd90ac;
+  }
+
+  .tile-label {
+    font-size: 1.4rem;
+    color: #4a0101;
+  }
+
+  .selected .tile-label,
+  .tile-container:hover .tile-label {
+    color: white;
+  }
+</style>
+<div class="tile-container" id="tileContainer">
+  <a href="#" id="tileLink" class="tile-link">
+    <fc-icon name="fla" size="25" class="tile-icon"></fc-icon>
+    <span class="tile-label">Formula</span>
+  </a>
+</div>
