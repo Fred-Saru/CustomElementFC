@@ -23,11 +23,6 @@
       </div>
       <div class="application-content" id="app">
 
-
-
-
-
-
       </div>
     </div>
   </div>
@@ -41,6 +36,65 @@
         roles: ["CFL_USER"]
       }
     }
+
+    var menuLinks = [
+      {
+        clickable: true,
+        label: "Recherche",
+        target: "self",
+        url: "#recherche",
+        children: [
+          {
+            label: "Mes formules",
+            target: "self",
+            url: "#MyFormula",
+          },
+          {
+            label: "Les formules de mon laboratoire",
+            target: "self",
+            url: "#MyLab",
+          }
+        ]
+      },
+      {
+        clickable: true,
+        label: "Création de formule",
+        target: "self",
+        url: "#Create",
+      },
+      {
+        label: "Assistant",
+        children: [
+          {
+            label: "Panier",
+            target: "self",
+            url: "#Panier",
+          },
+          {
+            label: "Comparateur",
+            target: "self",
+            url: "#Comparateur",
+          },
+          {
+            label: "Rechercher autorisation",
+            target: "self",
+            url: "#AuthSearch",
+          },
+          {
+            label: "Autorisation de sécurité MP",
+            target: "self",
+            url: "#AuthSecu",
+          },
+          {
+            label: "Impact croissance microbienne",
+            target: "self",
+            url: "#Microbe",
+          }
+        ]
+      }
+    ]
+
+    document.querySelector('fc-menu').links = menuLinks;
 
     var currentContext = [
       {
@@ -146,7 +200,6 @@
           order: 3
         },
       },
-      ,
       {
         key: "techno",
         quicksearch: {

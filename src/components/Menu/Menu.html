@@ -6,8 +6,6 @@
   ul {
     padding: 0;
     margin: 0;
-    height: 100px;
-    background-color: lightsalmon;
   }
 
   .menu-container {
@@ -136,6 +134,10 @@
     background-color: #523558;
   }
 
+  .menu-list {
+    padding: 15px;
+  }
+
   .hidden {
     display: none;
   }
@@ -150,7 +152,7 @@
             <fc-icon name="arrow-down" size="15" color="white"></fc-icon>
           </span>
         </button>
-        <div class="tile-list hub hidden" id="tileHub"></div>
+        <div class="tile-list hub hidden" id="tileList"></div>
       </li>
       <li class="menu-hub">
         <button type="button" class="category-title" id="menuBtn">
@@ -159,7 +161,7 @@
             <fc-icon name="arrow-up" size="15" color="white"></fc-icon>
           </span>
         </button>
-        <ul class="menu-list hub"></ul>
+        <ul class="menu-list hub" id="menuList"></ul>
       </li>
     </ul>
   </div>

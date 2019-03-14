@@ -29,11 +29,11 @@ class Shutter extends CustomElement {
 
   connectedCallback() {
     if (!this.hasAttribute('size')) {
-      this.setAttribute('size', 'small');
+      this.size = 'small';
     }
 
     if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'right');
+      this.side = 'right';
     }
   }
 

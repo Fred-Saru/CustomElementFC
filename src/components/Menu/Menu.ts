@@ -2,9 +2,16 @@ import html from './Menu.html';
 import CustomElement from '../../models/custom-element';
 import { Icon } from '../Icon/Icon';
 import { IMenu, CurrentContext } from '../../data/context-data';
-import '../Tile/Tile';
+import './Tile/Tile';
+import './Link/Link';
+import Link, { ILink } from './Link/Link';
+import './LinkGroup/LinkGroup';
+import Tile from './Tile/Tile';
+
 
 export default class Menu extends CustomElement {
+
+
   constructor() {
     super();
 
@@ -18,7 +25,10 @@ export default class Menu extends CustomElement {
       this.shadowRoot.appendChild(this._template.content.cloneNode(true));
       this.shadowRoot
         .querySelector('#menuCollapseBtn')
-        .addEventListener('click', () => (this.collapsed = !this.collapsed));
+        .addEventListener('click', () => {
+          this.collapsed = !this.collapsed
+          this.collapse(this.collapsed);
+        });
       this.shadowRoot
         .querySelector('#hubBtn')
         .addEventListener('click', this.toggleMenu);
@@ -31,29 +41,64 @@ export default class Menu extends CustomElement {
   }
 
   connectedCallback() {
+    this._updateProperties(['links', 'collapsed']);
     this.initialize(CurrentContext.getAllMenuData());
   }
 
+  static get observedAttributes() {
+    return ['collapsed', 'links'];
+  }
+
+  attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+    switch (name) {
+      case 'collapsed':
+        this.collapse((newValue !== null && newValue !== undefined));
+        break;
+      case 'links':
+        if (newValue) {
+          this.renderLinks(JSON.parse(newValue));
+        }
+        break;
+      default:
+        throw new Error(`Application ${name} is not supported.`);
+    }
+  }
+
   initialize = (menuData: IMenu[]) => {
-    const hub = this.shadowRoot.querySelector('#tileHub');
+    const hub = this.shadowRoot.querySelector('#tileList');
     const fragment = document.createDocumentFragment();
     const selectedMenu = CurrentContext.getCurrentMenuData();
     const menus = menuData.sort((a, b) => a.order > b.order ? 1 : -1);
     menus.forEach((menu) => {
-      const tile = document.createElement('fc-tile');
-      tile.setAttribute('tile', JSON.stringify({ url: menu.url, label: CurrentContext.extractLabel(menu.label), icon: menu.icon }));
+      const tile = <Tile>document.createElement('fc-tile');
+      tile.tile = { url: menu.url, label: CurrentContext.extractLabel(menu.label), icon: menu.icon };
+
       if (selectedMenu.order === menu.order) {
-        tile.setAttribute('selected', 'true');
+        tile.selected = true;
       }
+
       fragment.appendChild(tile);
     });
 
     hub.appendChild(fragment);
   }
 
+  renderLinks = (newLinks: ILink[]) => {
+    const menuContainer = this.shadowRoot.querySelector('#menuList');
+    const fragment = document.createDocumentFragment();
+
+    newLinks.forEach((newLink) => {
+      const link = newLink.clickable ? <Link>document.createElement('fc-link') : <Link>document.createElement('fc-link-group');
+      link.link = newLink;
+      fragment.appendChild(link);
+    });
+
+    menuContainer.appendChild(fragment);
+  };
+
   resizeHandler = () => {
     var width = window.innerWidth;
-    if (width < 1280) {
+    if (width < 1280 || this.collapsed) {
       this.collapsed = true;
     } else {
       this.collapsed = false;
@@ -65,12 +110,13 @@ export default class Menu extends CustomElement {
       (<any>this.shadowRoot.querySelectorAll('.hub'))
     );
     for (let i in menus) {
-      if (menus[i].classList.contains('hidden')) {
-        menus[i].classList.remove('hidden');
-        menus[i].parentElement.querySelector('fc-icon').setAttribute('name', 'arrow-up');
+      const menu = menus[i];
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        (<Icon>menu.parentElement.querySelector('fc-icon')).name = 'arrow-up';
       } else {
-        menus[i].classList.add('hidden');
-        menus[i].parentElement.querySelector('fc-icon').setAttribute('name', 'arrow-down');
+        menu.classList.add('hidden');
+        (<Icon>menu.parentElement.querySelector('fc-icon')).name = 'arrow-down';
       }
     }
   };
@@ -82,10 +128,10 @@ export default class Menu extends CustomElement {
     );
     if (shouldCollape) {
       menu.classList.add('is-collapsed');
-      collapseIcon.setAttribute('name', 'arrow-right');
+      collapseIcon.name = 'arrow-right';
     } else {
       menu.classList.remove('is-collapsed');
-      collapseIcon.setAttribute('name', 'arrow-left');
+      collapseIcon.name = 'arrow-left';
     }
   }
 
@@ -96,11 +142,17 @@ export default class Menu extends CustomElement {
   set collapsed(collapse) {
     if (collapse) {
       this.setAttribute('collapsed', '');
-      this.collapse(true);
     } else {
       this.removeAttribute('collapsed');
-      this.collapse(false);
     }
+  }
+
+  get links(): ILink[] {
+    return <ILink[]>JSON.parse(this.getAttribute('links'));
+  }
+
+  set links(newLinks: ILink[]) {
+    this.setAttribute('links', JSON.stringify(newLinks));
   }
 }
 

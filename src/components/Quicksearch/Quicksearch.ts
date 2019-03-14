@@ -3,6 +3,7 @@ import html from './Quicksearch.html';
 import { CurrentContext, ISearch } from '../../data/context-data';
 import '../Dropdown/Dropdown';
 import Dropdown from '../Dropdown/Dropdown';
+import { Icon } from '../Icon/Icon';
 
 export default class Quicksearch extends CustomElement {
   _searchData: ISearch[];
@@ -40,7 +41,7 @@ export default class Quicksearch extends CustomElement {
       items.push({ label: label, value: idx });
     });
 
-    this.shadowRoot.querySelector('#searchDropdown').setAttribute('items', JSON.stringify(items));
+    (<Dropdown>this.shadowRoot.querySelector('#searchDropdown')).items = items;
   }
 
   updatePlaceholder = () => {
@@ -49,17 +50,17 @@ export default class Quicksearch extends CustomElement {
     }
 
     const placeholder = this._isExact ? CurrentContext.extractLabel(this._selectedItem.exactSearch.placeholder) : CurrentContext.extractLabel(this._selectedItem.freeSearch.placeholder);
-    this.shadowRoot.querySelector('#searchInput').setAttribute('placeholder', placeholder);
+    (<HTMLInputElement>this.shadowRoot.querySelector('#searchInput')).placeholder = placeholder;
   }
 
   handleSearchTypeClick = () => {
     const typeBtn = this.shadowRoot.querySelector('#searchType');
     if (this._isExact) {
       this._isExact = false;
-      typeBtn.querySelector('fc-icon').setAttribute('name', 'free-search');
+      (<Icon>typeBtn.querySelector('fc-icon')).name = 'free-search';
     } else {
       this._isExact = true;
-      typeBtn.querySelector('fc-icon').setAttribute('name', 'exact-search');
+      (<Icon>typeBtn.querySelector('fc-icon')).name = 'exact-search';
     }
 
     this.updatePlaceholder();

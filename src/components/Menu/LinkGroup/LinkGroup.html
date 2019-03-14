@@ -1,0 +1,66 @@
+<style>
+  :host {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .group-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+
+  .group-title,
+  .sublink {
+    text-decoration: none;
+  }
+
+  .group-title {
+    color: white;
+    font-size: 1.6rem;
+
+  }
+
+  .group-icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 2px;
+  }
+
+  .sublink-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .sublink-list li {
+    list-style: none;
+  }
+
+  .sublink {
+    color: #cd90ac;
+    font-size: 1.4rem;
+  }
+
+  .sublink:hover {
+    text-decoration: underline;
+  }
+
+  .sublink::before {
+    content: '- ';
+    padding-left: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+<div class="group-head" id="grouHead">
+  <span href="#" class="group-title" id="groupHead">Link</span>
+  <span class="group-icon">
+    <fc-icon name="arrow-down" size="10" color="white"></fc-icon>
+  </span>
+</div>
+<ul class="sublink-list hidden" id="linkChildren">
+</ul>

@@ -5,6 +5,7 @@ import '../Shutter/Preferences/Preferences';
 import { IPreferenceShutter } from '../Shutter/Preferences/Preferences';
 import '../Quicksearch/Quicksearch';
 import { CurrentContext } from '../../data/context-data';
+import { Icon } from '../Icon/Icon';
 
 export default class Header extends CustomElement {
   constructor() {
@@ -34,9 +35,9 @@ export default class Header extends CustomElement {
   initHomeLink = () => {
     const titleData = CurrentContext.getCurrentTitleData();
     if (titleData) {
-      this.shadowRoot.querySelector('#home-icon').setAttribute('name', titleData.icon);
+      (<Icon>this.shadowRoot.querySelector('#home-icon')).name = titleData.icon;
       this.shadowRoot.querySelector('#home-label').textContent = CurrentContext.extractLabel(titleData.label);
-      this.shadowRoot.querySelector('#home-link').setAttribute('href', titleData.url);
+      (<HTMLAnchorElement>this.shadowRoot.querySelector('#home-link')).href = titleData.url;
     }
 
   }

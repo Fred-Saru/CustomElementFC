@@ -5,6 +5,11 @@ import { i18n as ___i18n } from '../services/translation-service';
 
 export default class CustomElement extends HTMLElement {
   _template: HTMLTemplateElement;
+  _props: string[];
+
+  connectedCallback() {
+
+  }
 
   public _i18n(key: string, options?: i18next.TranslationOptions): string {
     if (!key) {
@@ -26,7 +31,6 @@ export default class CustomElement extends HTMLElement {
       }
     );
   }
-
   public _prepareTemplate(key: string): void {
     const ieWindow = (<any>window).ShadyCSS;
     ieWindow && ieWindow.prepareTemplate(this._template, key);
@@ -39,5 +43,16 @@ export default class CustomElement extends HTMLElement {
 
   public _getTranslationModuleName(): string {
     return this.nodeName.toLowerCase();
+  }
+
+  public _updateProperties(props: string[]) {
+    props.forEach(prop => {
+      if (this.hasOwnProperty(prop)) {
+        const self = this as { [key: string]: any };
+        const value = self[prop];
+        delete self[prop];
+        self[prop] = value;
+      }
+    });
   }
 }

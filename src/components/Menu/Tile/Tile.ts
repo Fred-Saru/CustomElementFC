@@ -1,5 +1,6 @@
 import html from './Tile.html';
-import CustomElement from "../../models/custom-element";
+import CustomElement from "../../../models/custom-element";
+import { Icon } from '../../Icon/Icon';
 
 export interface ITile {
   url: string;
@@ -56,13 +57,13 @@ export default class Tile extends CustomElement {
 
   renderTile = (tile: ITile) => {
     const tileContainer = this.shadowRoot.querySelector('#tileContainer');
-    if (this.isSelected) {
+    if (this.selected) {
       tileContainer.classList.add('selected');
     }
 
-    const tileLink = tileContainer.querySelector('#tileLink');
-    tileLink.setAttribute('href', tile.url);
-    tileLink.querySelector('fc-icon').setAttribute('name', tile.icon);
+    const tileLink = <HTMLAnchorElement>tileContainer.querySelector('#tileLink');
+    tileLink.href = tile.url;
+    (<Icon>tileLink.querySelector('fc-icon')).name = tile.icon;
     tileLink.querySelector('span').textContent = tile.label;
   };
 
@@ -71,11 +72,15 @@ export default class Tile extends CustomElement {
   }
 
   set tile(newTile: ITile) {
-    this.setAttribute('url', JSON.stringify(newTile));
+    this.setAttribute('tile', JSON.stringify(newTile));
   }
 
-  get isSelected(): boolean {
+  get selected(): boolean {
     return this.hasAttribute('selected');
+  }
+
+  set selected(newValue: boolean) {
+    newValue ? this.setAttribute('selected', "") : this.removeAttribute('selected');
   }
 }
 

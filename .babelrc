@@ -5,6 +5,7 @@
     ]
   ],
   "plugins": [
+    "transform-es5-property-mutators",
     "transform-html-import-require-to-string"
   ]
 }
